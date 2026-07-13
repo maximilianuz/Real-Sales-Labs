@@ -60,32 +60,29 @@ const UserPremiumIconFemale = ({ size = 40 }) => (
 
 const CalendarPremiumIcon = ({ size = 26 }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" style={{ display: 'block' }}>
-    <defs>
-      <linearGradient id="calGradPremium" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#8b5cf6"/>
-        <stop offset="100%" stopColor="#6d28d9"/>
-      </linearGradient>
-    </defs>
-    {/* Outer calendar body - elegant premium style */}
-    <rect x="2.5" y="3.5" width="19" height="17.5" rx="2" fill="url(#calGradPremium)" opacity="0.15" stroke="url(#calGradPremium)" strokeWidth="1.3"/>
-    {/* Calendar header bar */}
-    <rect x="2.5" y="3.5" width="19" height="3.5" rx="2" fill="url(#calGradPremium)" opacity="0.3" stroke="none"/>
-    {/* Header top line */}
-    <line x1="2.5" y1="7" x2="21.5" y2="7" stroke="#8b5cf6" strokeWidth="0.8" opacity="0.5"/>
-    {/* Binding holes - left */}
-    <circle cx="5.5" cy="5.2" r="0.65" fill="#8b5cf6" opacity="0.7"/>
-    {/* Binding holes - right */}
-    <circle cx="18.5" cy="5.2" r="0.65" fill="#8b5cf6" opacity="0.7"/>
-    {/* Days grid - subtle dots */}
-    <circle cx="6" cy="10.5" r="0.4" fill="#8b5cf6" opacity="0.4"/>
-    <circle cx="12" cy="10.5" r="0.4" fill="#8b5cf6" opacity="0.4"/>
-    <circle cx="18" cy="10.5" r="0.4" fill="#8b5cf6" opacity="0.4"/>
-    <circle cx="6" cy="14" r="0.4" fill="#8b5cf6" opacity="0.5"/>
-    <circle cx="12" cy="14" r="0.5" fill="#8b5cf6" opacity="0.8"/>
-    <circle cx="18" cy="14" r="0.4" fill="#8b5cf6" opacity="0.5"/>
-    <circle cx="6" cy="17.5" r="0.4" fill="#8b5cf6" opacity="0.3"/>
-    <circle cx="12" cy="17.5" r="0.4" fill="#8b5cf6" opacity="0.3"/>
-    <circle cx="18" cy="17.5" r="0.4" fill="#8b5cf6" opacity="0.3"/>
+    {/* Calendar border */}
+    <rect x="3" y="4" width="18" height="17" rx="2" fill="none" stroke="#7c3aed" strokeWidth="1.2"/>
+
+    {/* Top header bar - purple filled */}
+    <rect x="3" y="4" width="18" height="4" rx="2" fill="#8b5cf6" opacity="0.2" stroke="none"/>
+
+    {/* Divider line between header and days */}
+    <line x1="3" y1="8" x2="21" y2="8" stroke="#7c3aed" strokeWidth="0.8" opacity="0.6"/>
+
+    {/* Left binding hole */}
+    <circle cx="6" cy="5.8" r="0.6" fill="#7c3aed"/>
+
+    {/* Right binding hole */}
+    <circle cx="18" cy="5.8" r="0.6" fill="#7c3aed"/>
+
+    {/* Day numbers - clear grid */}
+    <text x="6" y="12" fontSize="2.5" fill="#7c3aed" textAnchor="middle" dominantBaseline="middle" fontWeight="600">1</text>
+    <text x="12" y="12" fontSize="2.5" fill="#7c3aed" textAnchor="middle" dominantBaseline="middle" fontWeight="600">2</text>
+    <text x="18" y="12" fontSize="2.5" fill="#7c3aed" textAnchor="middle" dominantBaseline="middle" fontWeight="600">3</text>
+
+    <text x="6" y="17.5" fontSize="2.5" fill="#7c3aed" textAnchor="middle" dominantBaseline="middle" fontWeight="400" opacity="0.6">4</text>
+    <text x="12" y="17.5" fontSize="2.5" fill="#7c3aed" textAnchor="middle" dominantBaseline="middle" fontWeight="600" fill="#8b5cf6">5</text>
+    <text x="18" y="17.5" fontSize="2.5" fill="#7c3aed" textAnchor="middle" dominantBaseline="middle" fontWeight="400" opacity="0.6">6</text>
   </svg>
 );
 
