@@ -28,6 +28,36 @@ import {
   Copy
 } from 'lucide-react';
 
+const UserPremiumIconMale = ({ size = 40 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 48 48" style={{ display: 'block' }}>
+    <defs>
+      <linearGradient id="maleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#2563eb"/>
+        <stop offset="100%" stopColor="#7c3aed"/>
+      </linearGradient>
+    </defs>
+    <circle cx="24" cy="24" r="22" fill="url(#maleGrad)" opacity="0.2"/>
+    <circle cx="24" cy="16" r="8" fill="url(#maleGrad)"/>
+    <path d="M 24 24 Q 12 30 10 40 L 38 40 Q 36 30 24 24" fill="url(#maleGrad)"/>
+    <circle cx="24" cy="24" r="22" fill="none" stroke="url(#maleGrad)" strokeWidth="1.5" opacity="0.5"/>
+  </svg>
+);
+
+const UserPremiumIconFemale = ({ size = 40 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 48 48" style={{ display: 'block' }}>
+    <defs>
+      <linearGradient id="femaleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#ec4899"/>
+        <stop offset="100%" stopColor="#f43f5e"/>
+      </linearGradient>
+    </defs>
+    <circle cx="24" cy="24" r="22" fill="url(#femaleGrad)" opacity="0.2"/>
+    <circle cx="24" cy="14" r="8" fill="url(#femaleGrad)"/>
+    <path d="M 14 24 L 10 40 M 34 24 L 38 40 M 24 24 Q 12 28 10 40 L 38 40 Q 36 28 24 24" fill="url(#femaleGrad)" stroke="url(#femaleGrad)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <circle cx="24" cy="24" r="22" fill="none" stroke="url(#femaleGrad)" strokeWidth="1.5" opacity="0.5"/>
+  </svg>
+);
+
 const CalendarPremiumIcon = ({ size = 26 }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 512 512" style={{ display: 'block' }} className="calendar-premium-svg">
     <defs>
@@ -358,11 +388,13 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState(() => {
     const savedName = localStorage.getItem('realsaleslabs-user-name');
     const savedEmail = localStorage.getItem('realsaleslabs-user-email');
+    const savedGender = localStorage.getItem('realsaleslabs-user-gender');
     const name = savedName || 'Miembro ' + Math.floor(Math.random() * 9000 + 1000);
     if (!savedName) localStorage.setItem('realsaleslabs-user-name', name);
     return {
       name: name,
       email: savedEmail || '',
+      gender: savedGender || 'otro',
       tz: Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC',
       active: true
     };
@@ -372,6 +404,7 @@ export default function App() {
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [editName, setEditName] = useState(currentUser.name);
   const [editEmail, setEditEmail] = useState(currentUser.email);
+  const [editGender, setEditGender] = useState(currentUser.gender);
   const [showInitialSetup, setShowInitialSetup] = useState(!currentUser.email);
   const [showGuide, setShowGuide] = useState(false);
 
@@ -1410,10 +1443,12 @@ export default function App() {
 
     localStorage.setItem('realsaleslabs-user-name', editName.trim());
     localStorage.setItem('realsaleslabs-user-email', editEmail.trim());
+    localStorage.setItem('realsaleslabs-user-gender', editGender);
 
     setCurrentUser({
       name: editName.trim(),
       email: editEmail.trim(),
+      gender: editGender,
       tz: currentUser.tz,
       active: currentUser.active
     });
@@ -1766,6 +1801,37 @@ export default function App() {
                 />
                 <p style={{ fontSize: '11px', color: 'var(--text-muted)', margin: '6px 0 0 0' }}>Este email se usa para crear links de Google Meet automáticamente.</p>
               </div>
+
+              <div>
+                <label style={{ fontSize: '11px', fontWeight: '600', display: 'block', marginBottom: '6px', color: 'var(--text-main)' }}>Género (Opcional)</label>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  {[
+                    { value: 'masculino', label: '♂️ Masculino' },
+                    { value: 'femenino', label: '♀️ Femenino' },
+                    { value: 'otro', label: '🤝 Otro' }
+                  ].map(opt => (
+                    <button
+                      key={opt.value}
+                      type="button"
+                      onClick={() => setEditGender(opt.value)}
+                      style={{
+                        flex: 1,
+                        padding: '10px',
+                        borderRadius: '8px',
+                        border: editGender === opt.value ? '2px solid var(--color-primary)' : '1px solid var(--border-color)',
+                        backgroundColor: editGender === opt.value ? 'rgba(37, 99, 235, 0.1)' : 'var(--bg-card)',
+                        color: 'var(--text-main)',
+                        fontSize: '12px',
+                        fontWeight: '600',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s'
+                      }}
+                    >
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
 
             <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
@@ -1898,8 +1964,12 @@ export default function App() {
           marginTop: 'auto',
           boxShadow: '0 4px 16px rgba(37, 99, 235, 0.1)'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-            <div style={{ fontSize: '24px' }}>👤</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '10px' }}>
+            <div style={{ flexShrink: 0 }}>
+              {currentUser.gender === 'masculino' && <UserPremiumIconMale size={40} />}
+              {currentUser.gender === 'femenino' && <UserPremiumIconFemale size={40} />}
+              {currentUser.gender === 'otro' && <div style={{ fontSize: '32px' }}>🤝</div>}
+            </div>
             <div>
               <div className="profile-name" style={{ fontSize: '12px', fontWeight: '700', color: 'var(--text-main)' }}>{currentUser.name}</div>
               <div className="profile-email" style={{ fontSize: '10px', color: 'var(--text-muted)' }}>{currentUser.email ? '✓ Email listo' : '⚠️ Falta email'}</div>
@@ -1933,6 +2003,7 @@ export default function App() {
               onClick={() => {
                 setEditName(currentUser.name);
                 setEditEmail(currentUser.email || '');
+                setEditGender(currentUser.gender);
                 setIsEditingProfile(true);
               }}
               className="btn-small"
