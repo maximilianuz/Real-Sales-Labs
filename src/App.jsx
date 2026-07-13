@@ -165,11 +165,24 @@ export default function App() {
   const [newRoomNameInput, setNewRoomNameInput] = useState('');
   const [renameRoomInput, setRenameRoomInput] = useState('');
 
-  // Estado de Usuario Logueado (Simulado)
+  // Estado de Usuario Anónimo con Email para Google Meet
   const [currentUser, setCurrentUser] = useState(() => {
-    const saved = localStorage.getItem('realsaleslabs-user');
-    return saved ? JSON.parse(saved) : null;
+    const savedName = localStorage.getItem('realsaleslabs-user-name');
+    const savedEmail = localStorage.getItem('realsaleslabs-user-email');
+    const name = savedName || 'Miembro ' + Math.floor(Math.random() * 9000 + 1000);
+    if (!savedName) localStorage.setItem('realsaleslabs-user-name', name);
+    return {
+      name: name,
+      email: savedEmail || '',
+      tz: Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC',
+      active: true
+    };
   });
+
+  // Estado para editar perfil
+  const [isEditingProfile, setIsEditingProfile] = useState(false);
+  const [editName, setEditName] = useState(currentUser.name);
+  const [editEmail, setEditEmail] = useState(currentUser.email);
 
   // Base de Datos en Estado (Vacia para producción)
   const [members, setMembers] = useState([]);
@@ -1183,6 +1196,26 @@ export default function App() {
     setIsSidebarOpen(false); // Cierra el menú al cambiar de pestaña en móvil
   };
 
+  const saveProfileChanges = () => {
+    if (!editEmail.trim()) {
+      showNotification('El email es requerido para sincronizar con Google Meet', 'error');
+      return;
+    }
+
+    localStorage.setItem('realsaleslabs-user-name', editName.trim());
+    localStorage.setItem('realsaleslabs-user-email', editEmail.trim());
+
+    setCurrentUser({
+      name: editName.trim(),
+      email: editEmail.trim(),
+      tz: currentUser.tz,
+      active: currentUser.active
+    });
+
+    setIsEditingProfile(false);
+    showNotification('✅ Perfil actualizado correctamente', 'success');
+  };
+
   if (false) { // No show login screen - open access
     return (
       <div style={{
@@ -1433,6 +1466,63 @@ export default function App() {
         </div>
       )}
 
+      {/* MODAL EDITAR PERFIL */}
+      {isEditingProfile && (
+        <div className="confirm-overlay" role="dialog" aria-modal="true" onClick={() => setIsEditingProfile(false)}>
+          <div className="confirm-card" style={{ maxWidth: '400px' }} onClick={(e) => e.stopPropagation()}>
+            <h3 style={{ margin: '0 0 16px 0', fontSize: '18px', fontWeight: '700', color: 'var(--text-main)' }}>Editar Perfil</h3>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              <div>
+                <label style={{ fontSize: '11px', fontWeight: '600', display: 'block', marginBottom: '6px', color: 'var(--text-main)' }}>Nombre</label>
+                <input
+                  type="text"
+                  value={editName}
+                  onChange={(e) => setEditName(e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '10px 12px',
+                    borderRadius: '8px',
+                    border: '1px solid var(--border-color)',
+                    backgroundColor: 'var(--bg-card)',
+                    color: 'var(--text-main)',
+                    fontSize: '13px',
+                    boxSizing: 'border-box'
+                  }}
+                  placeholder="Tu nombre"
+                />
+              </div>
+
+              <div>
+                <label style={{ fontSize: '11px', fontWeight: '600', display: 'block', marginBottom: '6px', color: 'var(--text-main)' }}>Email de Gmail (Requerido para Google Meet)</label>
+                <input
+                  type="email"
+                  value={editEmail}
+                  onChange={(e) => setEditEmail(e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '10px 12px',
+                    borderRadius: '8px',
+                    border: '1px solid var(--border-color)',
+                    backgroundColor: 'var(--bg-card)',
+                    color: 'var(--text-main)',
+                    fontSize: '13px',
+                    boxSizing: 'border-box'
+                  }}
+                  placeholder="tu.email@gmail.com"
+                />
+                <p style={{ fontSize: '11px', color: 'var(--text-muted)', margin: '6px 0 0 0' }}>Este email se usa para crear links de Google Meet automáticamente.</p>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+              <button className="btn btn-outline" onClick={() => setIsEditingProfile(false)} style={{ flex: 1, padding: '10px' }}>Cancelar</button>
+              <button className="btn btn-indigo" onClick={saveProfileChanges} style={{ flex: 1, padding: '10px', fontWeight: '600' }}>Guardar</button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* MOBILE HEADER BAR */}
       <div className="mobile-header-bar">
         <button className="menu-toggle-btn" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
@@ -1512,23 +1602,27 @@ export default function App() {
 
         <div className="profile-widget">
           <div className="profile-name">👤 {currentUser.name}</div>
-          <div className="profile-email">{currentUser.email}</div>
+          <div className="profile-email">{currentUser.email || '(sin email)'}</div>
           <div style={{ fontSize: '9px', color: 'var(--text-muted)', marginTop: '2px' }}>Zona: {currentUser.tz.split('/').pop().replace(/_/g, ' ')}</div>
-          <button 
+          <button
             type="button"
-            onClick={handleLogout} 
-            className="btn-small" 
-            style={{ 
-              marginTop: '10px', 
-              padding: '4px 8px', 
-              fontSize: '10px', 
-              width: '100%', 
-              backgroundColor: 'rgba(255, 69, 58, 0.12)', 
-              color: 'var(--color-danger)', 
-              border: '1px solid rgba(255, 69, 58, 0.2)' 
+            onClick={() => {
+              setEditName(currentUser.name);
+              setEditEmail(currentUser.email || '');
+              setIsEditingProfile(true);
+            }}
+            className="btn-small"
+            style={{
+              marginTop: '10px',
+              padding: '4px 8px',
+              fontSize: '10px',
+              width: '100%',
+              backgroundColor: 'rgba(37, 99, 235, 0.12)',
+              color: 'var(--color-primary)',
+              border: '1px solid rgba(37, 99, 235, 0.2)'
             }}
           >
-            Cerrar Sesión
+            ✏️ Editar Perfil
           </button>
         </div>
       </nav>
