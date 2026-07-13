@@ -59,30 +59,28 @@ const UserPremiumIconFemale = ({ size = 40 }) => (
 );
 
 const CalendarPremiumIcon = ({ size = 26 }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" style={{ display: 'block' }}>
-    {/* Calendar border */}
-    <rect x="3" y="4" width="18" height="17" rx="2" fill="none" stroke="#7c3aed" strokeWidth="1.2"/>
-
-    {/* Top header bar - purple filled */}
-    <rect x="3" y="4" width="18" height="4" rx="2" fill="#8b5cf6" opacity="0.2" stroke="none"/>
-
-    {/* Divider line between header and days */}
-    <line x1="3" y1="8" x2="21" y2="8" stroke="#7c3aed" strokeWidth="0.8" opacity="0.6"/>
-
-    {/* Left binding hole */}
-    <circle cx="6" cy="5.8" r="0.6" fill="#7c3aed"/>
-
-    {/* Right binding hole */}
-    <circle cx="18" cy="5.8" r="0.6" fill="#7c3aed"/>
-
-    {/* Day numbers - clear grid */}
-    <text x="6" y="12" fontSize="2.5" fill="#7c3aed" textAnchor="middle" dominantBaseline="middle" fontWeight="600">1</text>
-    <text x="12" y="12" fontSize="2.5" fill="#7c3aed" textAnchor="middle" dominantBaseline="middle" fontWeight="600">2</text>
-    <text x="18" y="12" fontSize="2.5" fill="#7c3aed" textAnchor="middle" dominantBaseline="middle" fontWeight="600">3</text>
-
-    <text x="6" y="17.5" fontSize="2.5" fill="#7c3aed" textAnchor="middle" dominantBaseline="middle" fontWeight="400" opacity="0.6">4</text>
-    <text x="12" y="17.5" fontSize="2.5" fill="#7c3aed" textAnchor="middle" dominantBaseline="middle" fontWeight="600" fill="#8b5cf6">5</text>
-    <text x="18" y="17.5" fontSize="2.5" fill="#7c3aed" textAnchor="middle" dominantBaseline="middle" fontWeight="400" opacity="0.6">6</text>
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 512 512" style={{ display: 'block' }} className="calendar-premium-svg">
+    <defs>
+      <linearGradient id="calendarPremiumBg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#2563eb"/>
+        <stop offset="50%" stopColor="#7c3aed"/>
+        <stop offset="100%" stopColor="#2563eb"/>
+      </linearGradient>
+      <filter id="calendarGlow">
+        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+        <feMerge>
+          <feMergeNode in="coloredBlur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+    <rect className="calendar-bg" width="512" height="512" rx="120" fill="url(#calendarPremiumBg)" filter="url(#calendarGlow)"/>
+    <g transform="translate(100, 90) scale(14)">
+      <path fill="white" d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zm-5-10h3v3h-3zm-4 0h3v3H10zm4 4h3v3h-3zm-4 0h3v3H10z"/>
+      <circle cx="7" cy="8" r="1.5" fill="#fbbf24" opacity="0.9"/>
+      <circle cx="14" cy="15" r="1.2" fill="#10b981" opacity="0.8"/>
+      <path stroke="#fbbf24" strokeWidth="0.5" fill="none" d="M7 9v2M14 14v2" opacity="0.6"/>
+    </g>
   </svg>
 );
 
