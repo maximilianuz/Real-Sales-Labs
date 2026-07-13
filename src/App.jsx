@@ -29,32 +29,32 @@ import {
 } from 'lucide-react';
 
 const UserPremiumIconMale = ({ size = 40 }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 48 48" style={{ display: 'block' }}>
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 48 48" style={{ display: 'block' }} className="user-icon-male">
     <defs>
       <linearGradient id="maleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#2563eb"/>
-        <stop offset="100%" stopColor="#7c3aed"/>
+        <stop offset="0%" stopColor="#1e40af"/>
+        <stop offset="100%" stopColor="#6d28d9"/>
       </linearGradient>
     </defs>
-    <circle cx="24" cy="24" r="22" fill="url(#maleGrad)" opacity="0.2"/>
+    <circle cx="24" cy="24" r="22" fill="url(#maleGrad)" opacity="0.15"/>
     <circle cx="24" cy="16" r="8" fill="url(#maleGrad)"/>
     <path d="M 24 24 Q 12 30 10 40 L 38 40 Q 36 30 24 24" fill="url(#maleGrad)"/>
-    <circle cx="24" cy="24" r="22" fill="none" stroke="url(#maleGrad)" strokeWidth="1.5" opacity="0.5"/>
+    <circle cx="24" cy="24" r="22" fill="none" stroke="url(#maleGrad)" strokeWidth="2" opacity="0.6"/>
   </svg>
 );
 
 const UserPremiumIconFemale = ({ size = 40 }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 48 48" style={{ display: 'block' }}>
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 48 48" style={{ display: 'block' }} className="user-icon-female">
     <defs>
       <linearGradient id="femaleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#ec4899"/>
-        <stop offset="100%" stopColor="#f43f5e"/>
+        <stop offset="0%" stopColor="#be185d"/>
+        <stop offset="100%" stopColor="#9f1239"/>
       </linearGradient>
     </defs>
-    <circle cx="24" cy="24" r="22" fill="url(#femaleGrad)" opacity="0.2"/>
+    <circle cx="24" cy="24" r="22" fill="url(#femaleGrad)" opacity="0.15"/>
     <circle cx="24" cy="14" r="8" fill="url(#femaleGrad)"/>
     <path d="M 14 24 L 10 40 M 34 24 L 38 40 M 24 24 Q 12 28 10 40 L 38 40 Q 36 28 24 24" fill="url(#femaleGrad)" stroke="url(#femaleGrad)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    <circle cx="24" cy="24" r="22" fill="none" stroke="url(#femaleGrad)" strokeWidth="1.5" opacity="0.5"/>
+    <circle cx="24" cy="24" r="22" fill="none" stroke="url(#femaleGrad)" strokeWidth="2" opacity="0.6"/>
   </svg>
 );
 
@@ -2022,10 +2022,10 @@ export default function App() {
         <div className="profile-widget" style={{
           padding: '16px',
           borderRadius: '12px',
-          background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(124, 58, 237, 0.08) 100%)',
-          border: '2px solid var(--color-primary)',
+          background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(124, 58, 237, 0.06) 100%)',
+          border: '1.5px solid var(--color-primary)',
           marginTop: 'auto',
-          boxShadow: '0 4px 16px rgba(37, 99, 235, 0.1)'
+          boxShadow: '0 2px 8px rgba(37, 99, 235, 0.12)'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '10px' }}>
             <div style={{ flexShrink: 0 }}>

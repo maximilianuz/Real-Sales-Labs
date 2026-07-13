@@ -245,15 +245,21 @@ html.dark .nav-link.active {
 }
 
 .profile-name {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 13px;
   color: var(--text-main);
+  letter-spacing: -0.3px;
 }
 
 .profile-email {
   font-size: 11px;
-  color: var(--text-muted);
+  color: var(--text-main);
   word-break: break-all;
+  font-weight: 500;
+}
+
+html.dark .profile-email {
+  color: var(--text-muted);
 }
 
 /* Theme selector controls */
