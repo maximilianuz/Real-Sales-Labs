@@ -193,7 +193,7 @@ const LandingPage = ({ onEnter, theme }) => (
           WebkitTextFillColor: 'transparent',
           color: 'var(--color-primary)'
         }}>
-          Matcher
+          Sincronización de Horarios
         </p>
       </div>
 
@@ -284,7 +284,7 @@ const LandingPage = ({ onEnter, theme }) => (
           e.target.style.boxShadow = '0 4px 16px rgba(37, 99, 235, 0.3)';
         }}
       >
-        <span>Ingresar a Matcher</span>
+        <span>Ingresar</span>
         <ExternalLink size={18} />
       </button>
 
