@@ -203,7 +203,7 @@ const LandingPage = ({ onEnter, theme }) => (
           background: 'linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)',
           boxShadow: '0 8px 32px rgba(37, 99, 235, 0.3)'
         }}>
-          <CalendarPremiumIcon size={60} isDark={theme === 'dark'} />
+          <CalendarPremiumIcon size={70} isDark={theme === 'dark'} />
         </div>
         <h1 style={{
           margin: '0 0 8px 0',
@@ -1568,7 +1568,7 @@ export default function App() {
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '24px' }}>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
               <div className="brand-logo-container calendar-glow-pulse">
-                <CalendarPremiumIcon size={44} isDark={theme === 'dark'} />
+                <CalendarPremiumIcon size={48} isDark={theme === 'dark'} />
               </div>
               <div className="brand-title-stacked" style={{ textAlign: 'left' }}>
                 <span className="brand-title-sales" style={{ fontSize: '12px' }}>Real Sales Labs</span>
@@ -1969,7 +1969,7 @@ export default function App() {
         </button>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: 0 }}>
           <div className="brand-logo-container calendar-glow-pulse">
-            <CalendarPremiumIcon size={34} isDark={theme === 'dark'} />
+            <CalendarPremiumIcon size={38} isDark={theme === 'dark'} />
           </div>
           <span className="brand-title-sales">Real Sales Labs</span>
         </div>
@@ -1983,7 +1983,7 @@ export default function App() {
       <nav className={`nav-sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <div style={{ marginBottom: '28px', display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div className="brand-logo-container calendar-glow-pulse">
-            <CalendarPremiumIcon size={34} isDark={theme === 'dark'} />
+            <CalendarPremiumIcon size={38} isDark={theme === 'dark'} />
           </div>
           <span className="brand-title-sales">Real Sales Labs</span>
         </div>
