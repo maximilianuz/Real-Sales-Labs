@@ -60,27 +60,18 @@ const UserPremiumIconFemale = ({ size = 40 }) => (
 
 const CalendarPremiumIcon = ({ size = 26 }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" style={{ display: 'block' }}>
-    <defs>
-      <linearGradient id="calendarGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#3b82f6"/>
-        <stop offset="100%" stopColor="#2563eb"/>
-      </linearGradient>
-    </defs>
-    {/* Main calendar box */}
-    <rect x="3" y="4" width="18" height="17" rx="2" fill="url(#calendarGradient)" stroke="none"/>
-    {/* Top header bar */}
-    <rect x="3" y="4" width="18" height="4" rx="2" fill="url(#calendarGradient)" opacity="0.8" stroke="none"/>
-    {/* Calendar grid lines */}
-    <line x1="3" y1="8" x2="21" y2="8" stroke="white" strokeWidth="0.5" opacity="0.6"/>
-    <line x1="9" y1="4" x2="9" y2="21" stroke="white" strokeWidth="0.5" opacity="0.3"/>
-    <line x1="15" y1="4" x2="15" y2="21" stroke="white" strokeWidth="0.5" opacity="0.3"/>
-    {/* Calendar day dots/highlights */}
-    <circle cx="6" cy="11" r="1" fill="white" opacity="0.8"/>
-    <circle cx="12" cy="11" r="1" fill="white" opacity="0.8"/>
-    <circle cx="18" cy="11" r="1" fill="white" opacity="0.8"/>
-    <circle cx="6" cy="16" r="1" fill="white" opacity="0.6"/>
-    <circle cx="12" cy="16" r="1.2" fill="white"/>
-    <circle cx="18" cy="16" r="1" fill="white" opacity="0.6"/>
+    {/* Calendar body */}
+    <rect x="2" y="3" width="20" height="19" rx="2.5" fill="none" stroke="#1f2937" strokeWidth="1.5"/>
+    {/* Calendar header */}
+    <rect x="2" y="3" width="20" height="4" rx="2.5" fill="#f3f4f6" stroke="none"/>
+    {/* Top border line */}
+    <line x1="2" y1="7" x2="22" y2="7" stroke="#d1d5db" strokeWidth="1"/>
+    {/* Left hole */}
+    <circle cx="5" cy="5" r="0.7" fill="#1f2937"/>
+    {/* Right hole */}
+    <circle cx="19" cy="5" r="0.7" fill="#1f2937"/>
+    {/* Checkmark */}
+    <path d="M 10 14 L 13 17 L 18 10" stroke="#10b981" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
 
