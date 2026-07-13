@@ -58,28 +58,29 @@ const UserPremiumIconFemale = ({ size = 40 }) => (
   </svg>
 );
 
-const CalendarPremiumIcon = ({ size = 26, isDark = false }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 512 512" style={{ display: 'block' }}>
+const CalendarPremiumIcon = ({ size = 26 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" style={{ display: 'block' }}>
     <defs>
-      <linearGradient id={`calendarBg${isDark ? 'Dark' : 'Light'}`} x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor={isDark ? "#ffffff" : "#1a1a1a"}/>
-        <stop offset="50%" stopColor={isDark ? "#f0f0f0" : "#2d2d2d"}/>
-        <stop offset="100%" stopColor={isDark ? "#ffffff" : "#1a1a1a"}/>
+      <linearGradient id="calendarGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#3b82f6"/>
+        <stop offset="100%" stopColor="#2563eb"/>
       </linearGradient>
-      <filter id="calendarGlow">
-        <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-        <feMerge>
-          <feMergeNode in="coloredBlur"/>
-          <feMergeNode in="SourceGraphic"/>
-        </feMerge>
-      </filter>
     </defs>
-    <rect width="512" height="512" rx="120" fill={`url(#calendarBg${isDark ? 'Dark' : 'Light'})`} filter="url(#calendarGlow)"/>
-    <g transform="translate(100, 90) scale(14)">
-      <path fill="white" stroke="white" strokeWidth="0.5" d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zm-5-10h3v3h-3zm-4 0h3v3H10zm4 4h3v3h-3zm-4 0h3v3H10z"/>
-      <circle cx="7" cy="8" r="1.5" fill="#fbbf24" opacity="1"/>
-      <circle cx="14" cy="15" r="1.2" fill="#10b981" opacity="1"/>
-    </g>
+    {/* Main calendar box */}
+    <rect x="3" y="4" width="18" height="17" rx="2" fill="url(#calendarGradient)" stroke="none"/>
+    {/* Top header bar */}
+    <rect x="3" y="4" width="18" height="4" rx="2" fill="url(#calendarGradient)" opacity="0.8" stroke="none"/>
+    {/* Calendar grid lines */}
+    <line x1="3" y1="8" x2="21" y2="8" stroke="white" strokeWidth="0.5" opacity="0.6"/>
+    <line x1="9" y1="4" x2="9" y2="21" stroke="white" strokeWidth="0.5" opacity="0.3"/>
+    <line x1="15" y1="4" x2="15" y2="21" stroke="white" strokeWidth="0.5" opacity="0.3"/>
+    {/* Calendar day dots/highlights */}
+    <circle cx="6" cy="11" r="1" fill="white" opacity="0.8"/>
+    <circle cx="12" cy="11" r="1" fill="white" opacity="0.8"/>
+    <circle cx="18" cy="11" r="1" fill="white" opacity="0.8"/>
+    <circle cx="6" cy="16" r="1" fill="white" opacity="0.6"/>
+    <circle cx="12" cy="16" r="1.2" fill="white"/>
+    <circle cx="18" cy="16" r="1" fill="white" opacity="0.6"/>
   </svg>
 );
 
@@ -203,7 +204,7 @@ const LandingPage = ({ onEnter, theme }) => (
           background: 'linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)',
           boxShadow: '0 8px 32px rgba(37, 99, 235, 0.3)'
         }}>
-          <CalendarPremiumIcon size={70} isDark={theme === 'dark'} />
+          <CalendarPremiumIcon size={70}  />
         </div>
         <h1 style={{
           margin: '0 0 8px 0',
@@ -1568,7 +1569,7 @@ export default function App() {
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '24px' }}>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
               <div className="brand-logo-container calendar-glow-pulse">
-                <CalendarPremiumIcon size={48} isDark={theme === 'dark'} />
+                <CalendarPremiumIcon size={48}  />
               </div>
               <div className="brand-title-stacked" style={{ textAlign: 'left' }}>
                 <span className="brand-title-sales" style={{ fontSize: '12px' }}>Real Sales Labs</span>
@@ -1969,7 +1970,7 @@ export default function App() {
         </button>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: 0 }}>
           <div className="brand-logo-container calendar-glow-pulse">
-            <CalendarPremiumIcon size={38} isDark={theme === 'dark'} />
+            <CalendarPremiumIcon size={38}  />
           </div>
           <span className="brand-title-sales">Real Sales Labs</span>
         </div>
@@ -1983,7 +1984,7 @@ export default function App() {
       <nav className={`nav-sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <div style={{ marginBottom: '28px', display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div className="brand-logo-container calendar-glow-pulse">
-            <CalendarPremiumIcon size={38} isDark={theme === 'dark'} />
+            <CalendarPremiumIcon size={38}  />
           </div>
           <span className="brand-title-sales">Real Sales Labs</span>
         </div>
