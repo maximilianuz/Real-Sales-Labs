@@ -32,9 +32,9 @@ const CalendarPremiumIcon = ({ size = 26 }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 512 512" style={{ display: 'block' }} className="calendar-premium-svg">
     <defs>
       <linearGradient id="calendarPremiumBg" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#1e40af"/>
-        <stop offset="50%" stopColor="#6d28d9"/>
-        <stop offset="100%" stopColor="#5b21b6"/>
+        <stop offset="0%" stopColor="#0c2d6b"/>
+        <stop offset="50%" stopColor="#5b21b6"/>
+        <stop offset="100%" stopColor="#3f0f7f"/>
       </linearGradient>
       <filter id="calendarGlow">
         <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
@@ -46,7 +46,7 @@ const CalendarPremiumIcon = ({ size = 26 }) => (
     </defs>
     <rect className="calendar-bg" width="512" height="512" rx="120" fill="url(#calendarPremiumBg)" filter="url(#calendarGlow)"/>
     <g transform="translate(100, 90) scale(14)">
-      <path fill="white" stroke="white" strokeWidth="0.3" d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zm-5-10h3v3h-3zm-4 0h3v3H10zm4 4h3v3h-3zm-4 0h3v3H10z"/>
+      <path fill="white" stroke="white" strokeWidth="0.5" d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zm-5-10h3v3h-3zm-4 0h3v3H10zm4 4h3v3h-3zm-4 0h3v3H10z"/>
       <circle cx="7" cy="8" r="1.5" fill="#fbbf24" opacity="1"/>
       <circle cx="14" cy="15" r="1.2" fill="#10b981" opacity="1"/>
     </g>
@@ -374,7 +374,10 @@ export default function App() {
   const [editEmail, setEditEmail] = useState(currentUser.email);
 
   // Base de Datos en Estado (Vacia para producción)
-  const [members, setMembers] = useState([]);
+  const [members, setMembers] = useState(() => {
+    const cached = localStorage.getItem(`realsaleslabs-members-${currentRoomId}`);
+    return cached ? JSON.parse(cached) : [];
+  });
 
   // Disponibilidad: lista de { user, dayIdx, startHour, endHour }
   const [availabilities, setAvailabilities] = useState([]);
@@ -1128,7 +1131,9 @@ export default function App() {
       }
     }
 
-    setMembers([...members, newMember]);
+    const updatedMembers = [...members, newMember];
+    setMembers(updatedMembers);
+    localStorage.setItem(`realsaleslabs-members-${currentRoomId}`, JSON.stringify(updatedMembers));
     setNewMemberName('');
     setNewMemberEmail('');
     showNotification('Miembro agregado correctamente.');
@@ -1152,6 +1157,7 @@ export default function App() {
     }
     
     setMembers(updated);
+    localStorage.setItem(`realsaleslabs-members-${currentRoomId}`, JSON.stringify(updated));
   };
 
   const deleteMember = async (emailToDelete) => {
@@ -1172,7 +1178,9 @@ export default function App() {
     }
 
     const memberObj = members.find(m => m.email.toLowerCase() === emailToDelete.toLowerCase());
-    setMembers(prev => prev.filter(m => m.email.toLowerCase() !== emailToDelete.toLowerCase()));
+    const updatedMembers = members.filter(m => m.email.toLowerCase() !== emailToDelete.toLowerCase());
+    setMembers(updatedMembers);
+    localStorage.setItem(`realsaleslabs-members-${currentRoomId}`, JSON.stringify(updatedMembers));
     if (memberObj) {
       setAvailabilities(prev => prev.filter(a => a.user.toLowerCase() !== memberObj.name.toLowerCase()));
       setTemplates(prev => prev.filter(t => t.user.toLowerCase() !== memberObj.name.toLowerCase()));
