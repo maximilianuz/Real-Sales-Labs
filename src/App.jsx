@@ -60,18 +60,32 @@ const UserPremiumIconFemale = ({ size = 40 }) => (
 
 const CalendarPremiumIcon = ({ size = 26 }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" style={{ display: 'block' }}>
-    {/* Calendar body with universal blue color */}
-    <rect x="2" y="3" width="20" height="19" rx="2.5" fill="none" stroke="#3b82f6" strokeWidth="1.5"/>
-    {/* Calendar header with lighter blue */}
-    <rect x="2" y="3" width="20" height="4" rx="2.5" fill="#dbeafe" stroke="none"/>
-    {/* Top border line */}
-    <line x1="2" y1="7" x2="22" y2="7" stroke="#93c5fd" strokeWidth="1"/>
-    {/* Left hole */}
-    <circle cx="5" cy="5" r="0.7" fill="#3b82f6"/>
-    {/* Right hole */}
-    <circle cx="19" cy="5" r="0.7" fill="#3b82f6"/>
-    {/* Checkmark - bright green visible in both themes */}
-    <path d="M 10 14 L 13 17 L 18 10" stroke="#22c55e" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+    <defs>
+      <linearGradient id="calGradPremium" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#8b5cf6"/>
+        <stop offset="100%" stopColor="#6d28d9"/>
+      </linearGradient>
+    </defs>
+    {/* Outer calendar body - elegant premium style */}
+    <rect x="2.5" y="3.5" width="19" height="17.5" rx="2" fill="url(#calGradPremium)" opacity="0.15" stroke="url(#calGradPremium)" strokeWidth="1.3"/>
+    {/* Calendar header bar */}
+    <rect x="2.5" y="3.5" width="19" height="3.5" rx="2" fill="url(#calGradPremium)" opacity="0.3" stroke="none"/>
+    {/* Header top line */}
+    <line x1="2.5" y1="7" x2="21.5" y2="7" stroke="#8b5cf6" strokeWidth="0.8" opacity="0.5"/>
+    {/* Binding holes - left */}
+    <circle cx="5.5" cy="5.2" r="0.65" fill="#8b5cf6" opacity="0.7"/>
+    {/* Binding holes - right */}
+    <circle cx="18.5" cy="5.2" r="0.65" fill="#8b5cf6" opacity="0.7"/>
+    {/* Days grid - subtle dots */}
+    <circle cx="6" cy="10.5" r="0.4" fill="#8b5cf6" opacity="0.4"/>
+    <circle cx="12" cy="10.5" r="0.4" fill="#8b5cf6" opacity="0.4"/>
+    <circle cx="18" cy="10.5" r="0.4" fill="#8b5cf6" opacity="0.4"/>
+    <circle cx="6" cy="14" r="0.4" fill="#8b5cf6" opacity="0.5"/>
+    <circle cx="12" cy="14" r="0.5" fill="#8b5cf6" opacity="0.8"/>
+    <circle cx="18" cy="14" r="0.4" fill="#8b5cf6" opacity="0.5"/>
+    <circle cx="6" cy="17.5" r="0.4" fill="#8b5cf6" opacity="0.3"/>
+    <circle cx="12" cy="17.5" r="0.4" fill="#8b5cf6" opacity="0.3"/>
+    <circle cx="18" cy="17.5" r="0.4" fill="#8b5cf6" opacity="0.3"/>
   </svg>
 );
 
