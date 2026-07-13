@@ -59,12 +59,17 @@ const UserPremiumIconFemale = ({ size = 40 }) => (
 );
 
 const CalendarPremiumIcon = ({ size = 26 }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 512 512" style={{ display: 'block' }} className="calendar-premium-svg">
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 512 512" style={{ display: 'block' }} className="calendar-premium-icon">
     <defs>
-      <linearGradient id="calendarPremiumBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <linearGradient id="calendarPremiumBgLight" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stopColor="#1a1a1a"/>
         <stop offset="50%" stopColor="#2d2d2d"/>
         <stop offset="100%" stopColor="#1a1a1a"/>
+      </linearGradient>
+      <linearGradient id="calendarPremiumBgDark" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#ffffff"/>
+        <stop offset="50%" stopColor="#f0f0f0"/>
+        <stop offset="100%" stopColor="#ffffff"/>
       </linearGradient>
       <filter id="calendarGlow">
         <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
@@ -74,7 +79,8 @@ const CalendarPremiumIcon = ({ size = 26 }) => (
         </feMerge>
       </filter>
     </defs>
-    <rect className="calendar-bg" width="512" height="512" rx="120" fill="url(#calendarPremiumBg)" filter="url(#calendarGlow)"/>
+    <rect className="calendar-bg-light" width="512" height="512" rx="120" fill="url(#calendarPremiumBgLight)" filter="url(#calendarGlow)"/>
+    <rect className="calendar-bg-dark" width="512" height="512" rx="120" fill="url(#calendarPremiumBgDark)" filter="url(#calendarGlow)" style={{ display: 'none' }}/>
     <g transform="translate(100, 90) scale(14)">
       <path fill="white" stroke="white" strokeWidth="0.5" d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zm-5-10h3v3h-3zm-4 0h3v3H10zm4 4h3v3h-3zm-4 0h3v3H10z"/>
       <circle cx="7" cy="8" r="1.5" fill="#fbbf24" opacity="1"/>

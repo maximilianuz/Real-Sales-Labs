@@ -815,6 +815,23 @@ input:checked + .switch-slider:before {
 }
 
 /* --- CALENDARIO PREMIUM INDICADOR / ATENCIÓN --- */
+/* Calendar Icon Theme Toggle */
+.calendar-premium-icon .calendar-bg-light {
+  display: block;
+}
+
+.calendar-premium-icon .calendar-bg-dark {
+  display: none;
+}
+
+html.dark .calendar-premium-icon .calendar-bg-light {
+  display: none;
+}
+
+html.dark .calendar-premium-icon .calendar-bg-dark {
+  display: block;
+}
+
 @keyframes calendarGlowPulse {
   0% {
     box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7), 0 0 12px rgba(124, 58, 237, 0.4);
