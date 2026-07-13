@@ -60,18 +60,18 @@ const UserPremiumIconFemale = ({ size = 40 }) => (
 
 const CalendarPremiumIcon = ({ size = 26 }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" style={{ display: 'block' }}>
-    {/* Calendar body */}
-    <rect x="2" y="3" width="20" height="19" rx="2.5" fill="none" stroke="#1f2937" strokeWidth="1.5"/>
-    {/* Calendar header */}
-    <rect x="2" y="3" width="20" height="4" rx="2.5" fill="#f3f4f6" stroke="none"/>
+    {/* Calendar body with universal blue color */}
+    <rect x="2" y="3" width="20" height="19" rx="2.5" fill="none" stroke="#3b82f6" strokeWidth="1.5"/>
+    {/* Calendar header with lighter blue */}
+    <rect x="2" y="3" width="20" height="4" rx="2.5" fill="#dbeafe" stroke="none"/>
     {/* Top border line */}
-    <line x1="2" y1="7" x2="22" y2="7" stroke="#d1d5db" strokeWidth="1"/>
+    <line x1="2" y1="7" x2="22" y2="7" stroke="#93c5fd" strokeWidth="1"/>
     {/* Left hole */}
-    <circle cx="5" cy="5" r="0.7" fill="#1f2937"/>
+    <circle cx="5" cy="5" r="0.7" fill="#3b82f6"/>
     {/* Right hole */}
-    <circle cx="19" cy="5" r="0.7" fill="#1f2937"/>
-    {/* Checkmark */}
-    <path d="M 10 14 L 13 17 L 18 10" stroke="#10b981" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+    <circle cx="19" cy="5" r="0.7" fill="#3b82f6"/>
+    {/* Checkmark - bright green visible in both themes */}
+    <path d="M 10 14 L 13 17 L 18 10" stroke="#22c55e" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
 
