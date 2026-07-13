@@ -180,10 +180,10 @@ const LandingPage = ({ onEnter, theme }) => (
     {/* Theme selector top-right */}
     <div style={{ position: 'absolute', top: '20px', right: '20px', display: 'flex', gap: '8px', zIndex: 10 }}>
       <div className="theme-selector" style={{ margin: 0 }}>
-        <button className={`theme-btn ${theme === 'light' ? 'active' : ''}`} onClick={() => document.documentElement.classList.remove('dark')} title="Modo Claro">
+        <button className={`theme-btn ${theme === 'light' ? 'active' : ''}`} onClick={() => { document.documentElement.classList.remove('dark'); setTheme('light'); }} title="Modo Claro">
           <Sun size={12} />
         </button>
-        <button className={`theme-btn ${theme === 'dark' ? 'active' : ''}`} onClick={() => document.documentElement.classList.add('dark')} title="Modo Oscuro">
+        <button className={`theme-btn ${theme === 'dark' ? 'active' : ''}`} onClick={() => { document.documentElement.classList.add('dark'); setTheme('dark'); }} title="Modo Oscuro">
           <Moon size={12} />
         </button>
       </div>
@@ -2014,13 +2014,13 @@ export default function App() {
 
         {/* THEME SELECTOR WIDGET */}
         <div className="theme-selector">
-          <button className={`theme-btn ${theme === 'light' ? 'active' : ''}`} onClick={() => setTheme('light')} title="Modo Claro">
+          <button className={`theme-btn ${theme === 'light' ? 'active' : ''}`} onClick={() => { document.documentElement.classList.remove('dark'); setTheme('light'); }} title="Modo Claro">
             <Sun size={12} /> Claro
           </button>
-          <button className={`theme-btn ${theme === 'dark' ? 'active' : ''}`} onClick={() => setTheme('dark')} title="Modo Oscuro">
+          <button className={`theme-btn ${theme === 'dark' ? 'active' : ''}`} onClick={() => { document.documentElement.classList.add('dark'); setTheme('dark'); }} title="Modo Oscuro">
             <Moon size={12} /> Oscuro
           </button>
-          <button className={`theme-btn ${theme === 'system' ? 'active' : ''}`} onClick={() => setTheme('system')} title="Seguir Sistema">
+          <button className={`theme-btn ${theme === 'system' ? 'active' : ''}`} onClick={() => { const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches; if (systemPrefersDark) document.documentElement.classList.add('dark'); else document.documentElement.classList.remove('dark'); setTheme('system'); }} title="Seguir Sistema">
             <Monitor size={12} /> Auto
           </button>
         </div>
