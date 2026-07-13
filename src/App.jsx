@@ -147,9 +147,7 @@ export default function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Autenticación de Google (Simulada)
-  const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    return localStorage.getItem('realsaleslabs-logged') === 'true';
-  });
+  const [isLoggedIn, setIsLoggedIn] = useState(true); // Acceso abierto
 
   // Estado del flujo de Login/Registro
   const [loginStep, setLoginStep] = useState(1); // 1: Google Email, 2: Profile setup Form
@@ -1185,7 +1183,7 @@ export default function App() {
     setIsSidebarOpen(false); // Cierra el menú al cambiar de pestaña en móvil
   };
 
-  if (!isLoggedIn || !currentUser) {
+  if (false) { // No show login screen - open access
     return (
       <div style={{
         display: 'flex',
