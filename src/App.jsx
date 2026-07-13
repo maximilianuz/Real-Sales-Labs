@@ -32,12 +32,12 @@ const CalendarPremiumIcon = ({ size = 26 }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 512 512" style={{ display: 'block' }} className="calendar-premium-svg">
     <defs>
       <linearGradient id="calendarPremiumBg" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#2563eb"/>
-        <stop offset="50%" stopColor="#7c3aed"/>
-        <stop offset="100%" stopColor="#2563eb"/>
+        <stop offset="0%" stopColor="#1e40af"/>
+        <stop offset="50%" stopColor="#6d28d9"/>
+        <stop offset="100%" stopColor="#5b21b6"/>
       </linearGradient>
       <filter id="calendarGlow">
-        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+        <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
         <feMerge>
           <feMergeNode in="coloredBlur"/>
           <feMergeNode in="SourceGraphic"/>
@@ -46,10 +46,9 @@ const CalendarPremiumIcon = ({ size = 26 }) => (
     </defs>
     <rect className="calendar-bg" width="512" height="512" rx="120" fill="url(#calendarPremiumBg)" filter="url(#calendarGlow)"/>
     <g transform="translate(100, 90) scale(14)">
-      <path fill="white" d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zm-5-10h3v3h-3zm-4 0h3v3H10zm4 4h3v3h-3zm-4 0h3v3H10z"/>
-      <circle cx="7" cy="8" r="1.5" fill="#fbbf24" opacity="0.9"/>
-      <circle cx="14" cy="15" r="1.2" fill="#10b981" opacity="0.8"/>
-      <path stroke="#fbbf24" strokeWidth="0.5" fill="none" d="M7 9v2M14 14v2" opacity="0.6"/>
+      <path fill="white" stroke="white" strokeWidth="0.3" d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zm-5-10h3v3h-3zm-4 0h3v3H10zm4 4h3v3h-3zm-4 0h3v3H10z"/>
+      <circle cx="7" cy="8" r="1.5" fill="#fbbf24" opacity="1"/>
+      <circle cx="14" cy="15" r="1.2" fill="#10b981" opacity="1"/>
     </g>
   </svg>
 );
@@ -965,7 +964,7 @@ export default function App() {
     localStorage.setItem('realsaleslabs-logged', 'true');
     localStorage.setItem('realsaleslabs-user', JSON.stringify(newUser));
 
-    showNotification(`¡Registro completo! Bienvenido a Real Sales Labs Matcher, ${newUser.name}.`);
+    showNotification(`¡Registro completo! Bienvenido a Real Sales Labs, ${newUser.name}.`);
   };
 
   const handleLogout = async () => {
@@ -1262,7 +1261,7 @@ export default function App() {
               // Construimos el payload de Google Calendar Event
               const eventPayload = {
                 summary: `Real Sales Labs Roleplay: ${match.participants}`,
-                description: 'Videollamada de entrenamiento agendada mediante Real Sales Labs Matcher.',
+                description: 'Videollamada de entrenamiento agendada mediante Real Sales Labs.',
                 start: { dateTime: new Date().toISOString(), timeZone: 'UTC' }, // Se calcula a partir del match en producción
                 end: { dateTime: new Date(Date.now() + 60*60*1000).toISOString(), timeZone: 'UTC' },
                 attendees: match.participants.split(', ').map(name => {
@@ -1454,21 +1453,14 @@ export default function App() {
         }}>
           {/* Logo Brand Header */}
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '24px' }}>
-            <a 
-              href="https://www.skool.com/real-sales-lab-8381/about?ref=6b5c94a4d70e488bba9eb815023e8247" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              title="Haz clic para visitar el portal de Real Sales Labs"
-              className="brand-logo-interactive"
-            >
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
               <div className="brand-logo-container calendar-glow-pulse">
                 <CalendarPremiumIcon size={44} />
               </div>
               <div className="brand-title-stacked" style={{ textAlign: 'left' }}>
                 <span className="brand-title-sales" style={{ fontSize: '12px' }}>Real Sales Labs</span>
-                <span className="brand-title-arena" style={{ fontSize: '20px' }}>Matcher</span>
               </div>
-            </a>
+            </div>
           </div>
 
           {/* STEP 1: GOOGLE EMAIL INPUT */}
@@ -1774,18 +1766,12 @@ export default function App() {
         <button className="menu-toggle-btn" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
           {isSidebarOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
-        <a href="https://www.skool.com/real-sales-lab-8381/about?ref=6b5c94a4d70e488bba9eb815023e8247" target="_blank" rel="noopener noreferrer" title="Ir al portal de Real Sales Labs" className="brand-logo-interactive" style={{ margin: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: 0 }}>
           <div className="brand-logo-container calendar-glow-pulse">
             <CalendarPremiumIcon size={34} />
           </div>
-          <div className="brand-title-stacked">
-            <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-              <span className="brand-title-sales">Real Sales Labs</span>
-              <span className="portal-badge-mini">PORTAL ↗</span>
-            </div>
-            <span className="brand-title-arena">Matcher</span>
-          </div>
-        </a>
+          <span className="brand-title-sales">Real Sales Labs</span>
+        </div>
         <div style={{ width: '34px' }}></div> {/* Spacer to center the logo */}
       </div>
 
@@ -1794,25 +1780,11 @@ export default function App() {
 
       {/* 1. SIDEBAR NAVIGATION */}
       <nav className={`nav-sidebar ${isSidebarOpen ? 'open' : ''}`}>
-        <div style={{ marginBottom: '28px' }}>
-          <a 
-            href="https://www.skool.com/real-sales-lab-8381/about?ref=6b5c94a4d70e488bba9eb815023e8247" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            title="Haz clic para visitar el Portal de Real Sales Labs" 
-            className="brand-logo-interactive"
-          >
-            <div className="brand-logo-container calendar-glow-pulse">
-              <CalendarPremiumIcon size={34} />
-            </div>
-            <div className="brand-title-stacked">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <span className="brand-title-sales">Real Sales Labs</span>
-                <span className="portal-badge-mini">PORTAL ↗</span>
-              </div>
-              <span className="brand-title-arena">Matcher</span>
-            </div>
-          </a>
+        <div style={{ marginBottom: '28px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div className="brand-logo-container calendar-glow-pulse">
+            <CalendarPremiumIcon size={34} />
+          </div>
+          <span className="brand-title-sales">Real Sales Labs</span>
         </div>
 
         <div className="nav-links">
