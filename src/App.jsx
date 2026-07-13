@@ -1416,8 +1416,13 @@ export default function App() {
       active: currentUser.active
     });
 
+    // Auto-completar el formulario de "Agregar Nuevo Role-Player" con los datos del perfil
+    setNewMemberName(editName.trim());
+    setNewMemberEmail(editEmail.trim());
+
     setIsEditingProfile(false);
-    showNotification('✅ Perfil actualizado correctamente', 'success');
+    setActiveTab('members');
+    showNotification('✅ Perfil actualizado. Confirma tus datos en "Gestionar Equipo" para unirte a la sala.', 'success');
   };
 
   if (false) { // No show login screen - open access
