@@ -62,9 +62,9 @@ const CalendarPremiumIcon = ({ size = 26 }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 512 512" style={{ display: 'block' }} className="calendar-premium-svg">
     <defs>
       <linearGradient id="calendarPremiumBg" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#0c2d6b"/>
-        <stop offset="50%" stopColor="#5b21b6"/>
-        <stop offset="100%" stopColor="#3f0f7f"/>
+        <stop offset="0%" stopColor="#1a1a1a"/>
+        <stop offset="50%" stopColor="#2d2d2d"/>
+        <stop offset="100%" stopColor="#1a1a1a"/>
       </linearGradient>
       <filter id="calendarGlow">
         <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
