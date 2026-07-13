@@ -28,22 +28,28 @@ import {
   Copy
 } from 'lucide-react';
 
-const ChessKnightIcon = ({ size = 26 }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 512 512" style={{ display: 'block' }} className="chess-knight-svg">
+const CalendarPremiumIcon = ({ size = 26 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 512 512" style={{ display: 'block' }} className="calendar-premium-svg">
     <defs>
-      <linearGradient id="salesArenaKnightBg" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#0a84ff"/>
-        <stop offset="55%" stopColor="#5e5ce6"/>
-        <stop offset="100%" stopColor="#4d4ad9"/>
+      <linearGradient id="calendarPremiumBg" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#2563eb"/>
+        <stop offset="50%" stopColor="#7c3aed"/>
+        <stop offset="100%" stopColor="#2563eb"/>
       </linearGradient>
+      <filter id="calendarGlow">
+        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+        <feMerge>
+          <feMergeNode in="coloredBlur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
     </defs>
-    <rect className="knight-bg" width="512" height="512" rx="115" fill="url(#salesArenaKnightBg)"/>
-    <g transform="translate(112, 112) scale(12)" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M5 20a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1z"/>
-      <path d="M16.5 18c1-2 2.5-5 2.5-9a7 7 0 0 0-7-7H6.635a1 1 0 0 0-.768 1.64L7 5l-2.32 5.802a2 2 0 0 0 .95 2.526l2.87 1.456"/>
-      <path d="m15 5 1.425-1.425"/>
-      <path d="m17 8 1.53-1.53"/>
-      <path d="M9.713 12.185 7 18"/>
+    <rect className="calendar-bg" width="512" height="512" rx="120" fill="url(#calendarPremiumBg)" filter="url(#calendarGlow)"/>
+    <g transform="translate(100, 90) scale(14)">
+      <path fill="white" d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zm-5-10h3v3h-3zm-4 0h3v3H10zm4 4h3v3h-3zm-4 0h3v3H10z"/>
+      <circle cx="7" cy="8" r="1.5" fill="#fbbf24" opacity="0.9"/>
+      <circle cx="14" cy="15" r="1.2" fill="#10b981" opacity="0.8"/>
+      <path stroke="#fbbf24" strokeWidth="0.5" fill="none" d="M7 9v2M14 14v2" opacity="0.6"/>
     </g>
   </svg>
 );
@@ -1227,8 +1233,8 @@ export default function App() {
               title="Haz clic para visitar el portal de Real Sales Labs"
               className="brand-logo-interactive"
             >
-              <div className="brand-logo-container horse-glow-pulse">
-                <ChessKnightIcon size={44} />
+              <div className="brand-logo-container calendar-glow-pulse">
+                <CalendarPremiumIcon size={44} />
               </div>
               <div className="brand-title-stacked" style={{ textAlign: 'left' }}>
                 <span className="brand-title-sales" style={{ fontSize: '12px' }}>Real Sales Labs</span>
@@ -1435,8 +1441,8 @@ export default function App() {
           {isSidebarOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
         <a href="https://www.skool.com/real-sales-lab-8381/about?ref=6b5c94a4d70e488bba9eb815023e8247" target="_blank" rel="noopener noreferrer" title="Ir al portal de Real Sales Labs" className="brand-logo-interactive" style={{ margin: 0 }}>
-          <div className="brand-logo-container horse-glow-pulse">
-            <ChessKnightIcon size={34} />
+          <div className="brand-logo-container calendar-glow-pulse">
+            <CalendarPremiumIcon size={34} />
           </div>
           <div className="brand-title-stacked">
             <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
@@ -1462,8 +1468,8 @@ export default function App() {
             title="Haz clic para visitar el Portal de Real Sales Labs" 
             className="brand-logo-interactive"
           >
-            <div className="brand-logo-container horse-glow-pulse">
-              <ChessKnightIcon size={34} />
+            <div className="brand-logo-container calendar-glow-pulse">
+              <CalendarPremiumIcon size={34} />
             </div>
             <div className="brand-title-stacked">
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
