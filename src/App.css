@@ -320,6 +320,12 @@
   min-width: 600px;
 }
 
+.heatmap-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
 .heatmap-th {
   background-color: var(--bg-card-hover);
   color: var(--text-main);
@@ -377,6 +383,16 @@
   min-width: 500px;
 }
 
+.editor-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.editor-table thead tr {
+  background-color: var(--bg-sidebar) !important;
+}
+
 .editor-cell {
   height: 24px;
   border-right: 1px solid var(--border-color);
@@ -405,6 +421,12 @@
   border-radius: 12px;
   overflow: hidden;
   min-width: 500px;
+}
+
+.affinity-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .affinity-th {
