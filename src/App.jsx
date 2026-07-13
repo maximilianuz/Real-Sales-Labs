@@ -1945,7 +1945,7 @@ export default function App() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               {[
                 { title: '1️⃣ Completa tu Perfil', desc: 'Haz clic en "Editar Perfil" en el panel izquierdo. Ingresa tu nombre y email de Gmail.' },
-                { title: '2️⃣ Gestiona tu Equipo', desc: 'Ve a "Gestionar Equipo" y agrega a todos los integrantes del grupo con sus emails.' },
+                { title: '2️⃣ Gestiona tu Equipo', desc: 'Ve a "Gestionar Equipo" para ver todos los miembros de esta sala que están activos.' },
                 { title: '3️⃣ Carga Disponibilidad', desc: 'Usa "Cargar Disponibilidad" para marcar en qué horarios estás disponible cada día de la semana.' },
                 { title: '4️⃣ Visualiza Coincidencias', desc: 'En "Mapa de Calor" verás cuándo hay más personas disponibles. En "Afinidad" ves coincidencias por parejas.' },
                 { title: '5️⃣ Genera Reuniones', desc: 'El sistema automáticamente crea links de Google Meet para los horarios coincidentes.' }
