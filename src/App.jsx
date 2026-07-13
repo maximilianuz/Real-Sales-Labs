@@ -2614,14 +2614,25 @@ export default function App() {
                       <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Participa:</span>
-                          <label className="switch-control">
-                            <input
-                              type="checkbox"
-                              checked={m.active}
-                              onChange={() => toggleMemberActive(idx)}
-                            />
-                            <span className="switch-slider"></span>
-                          </label>
+                          {m.email.toLowerCase() === currentUser.email.toLowerCase() ? (
+                            <label className="switch-control">
+                              <input
+                                type="checkbox"
+                                checked={m.active}
+                                onChange={() => toggleMemberActive(idx)}
+                              />
+                              <span className="switch-slider"></span>
+                            </label>
+                          ) : (
+                            <label className="switch-control" style={{ opacity: 0.5, cursor: 'not-allowed' }}>
+                              <input
+                                type="checkbox"
+                                checked={m.active}
+                                disabled
+                              />
+                              <span className="switch-slider"></span>
+                            </label>
+                          )}
                         </div>
                         {m.email.toLowerCase() !== currentUser.email.toLowerCase() && (
                           <button
