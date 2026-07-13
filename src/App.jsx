@@ -372,6 +372,8 @@ export default function App() {
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [editName, setEditName] = useState(currentUser.name);
   const [editEmail, setEditEmail] = useState(currentUser.email);
+  const [showInitialSetup, setShowInitialSetup] = useState(!currentUser.email);
+  const [showGuide, setShowGuide] = useState(false);
 
   // Base de Datos en Estado (Vacia para producción)
   const [members, setMembers] = useState(() => {
@@ -1774,6 +1776,63 @@ export default function App() {
         </div>
       )}
 
+      {/* MODAL SETUP INICIAL */}
+      {showInitialSetup && (
+        <div className="confirm-overlay" role="dialog" aria-modal="true" onClick={() => setShowInitialSetup(false)}>
+          <div className="confirm-card" style={{ maxWidth: '450px', padding: '40px 30px' }} onClick={(e) => e.stopPropagation()}>
+            <div style={{ fontSize: '48px', marginBottom: '16px', textAlign: 'center' }}>🚀</div>
+            <h2 style={{ margin: '0 0 12px 0', fontSize: '20px', fontWeight: '800', color: 'var(--text-main)', textAlign: 'center' }}>¡Bienvenido a Real Sales Labs!</h2>
+            <p style={{ margin: '0 0 24px 0', fontSize: '14px', color: 'var(--text-muted)', textAlign: 'center', lineHeight: '1.6' }}>
+              Para comenzar, completa tu perfil con tu nombre y email de Gmail. Esto es necesario para crear links de Google Meet automáticamente.
+            </p>
+
+            <div style={{ backgroundColor: 'rgba(37, 99, 235, 0.08)', border: '1px solid rgba(37, 99, 235, 0.2)', borderRadius: '12px', padding: '16px', marginBottom: '24px' }}>
+              <p style={{ margin: 0, fontSize: '12px', color: 'var(--text-main)', fontWeight: '600', marginBottom: '8px' }}>📝 Pasos rápidos:</p>
+              <ul style={{ margin: 0, paddingLeft: '20px', fontSize: '13px', color: 'var(--text-muted)', lineHeight: '1.6' }}>
+                <li>Completa tu nombre y email en el perfil</li>
+                <li>Agrega a los miembros de tu equipo</li>
+                <li>Carga tu disponibilidad horaria</li>
+                <li>¡Listo! Se crearán los meets automáticamente</li>
+              </ul>
+            </div>
+
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <button className="btn btn-outline" onClick={() => setShowInitialSetup(false)} style={{ flex: 1, padding: '12px', fontWeight: '600' }}>Más Tarde</button>
+              <button className="btn btn-indigo" onClick={() => { setShowInitialSetup(false); setIsEditingProfile(true); }} style={{ flex: 1, padding: '12px', fontWeight: '600' }}>Completar Perfil →</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* MODAL GUÍA DE USO */}
+      {showGuide && (
+        <div className="confirm-overlay" role="dialog" aria-modal="true" onClick={() => setShowGuide(false)}>
+          <div className="confirm-card" style={{ maxWidth: '550px', maxHeight: '80vh', overflow: 'auto', padding: '40px 30px' }} onClick={(e) => e.stopPropagation()}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+              <h2 style={{ margin: 0, fontSize: '20px', fontWeight: '800', color: 'var(--text-main)' }}>📖 Guía Rápida</h2>
+              <button onClick={() => setShowGuide(false)} style={{ background: 'none', border: 'none', fontSize: '24px', cursor: 'pointer', color: 'var(--text-muted)' }}>×</button>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              {[
+                { title: '1️⃣ Completa tu Perfil', desc: 'Haz clic en "Editar Perfil" en el panel izquierdo. Ingresa tu nombre y email de Gmail.' },
+                { title: '2️⃣ Gestiona tu Equipo', desc: 'Ve a "Gestionar Equipo" y agrega a todos los integrantes del grupo con sus emails.' },
+                { title: '3️⃣ Carga Disponibilidad', desc: 'Usa "Cargar Disponibilidad" para marcar en qué horarios estás disponible cada día de la semana.' },
+                { title: '4️⃣ Visualiza Coincidencias', desc: 'En "Mapa de Calor" verás cuándo hay más personas disponibles. En "Afinidad" ves coincidencias por parejas.' },
+                { title: '5️⃣ Genera Reuniones', desc: 'El sistema automáticamente crea links de Google Meet para los horarios coincidentes.' }
+              ].map((item, i) => (
+                <div key={i} style={{ padding: '14px', backgroundColor: 'var(--bg-card)', borderRadius: '10px', border: '1px solid var(--border-color)' }}>
+                  <p style={{ margin: '0 0 6px 0', fontSize: '13px', fontWeight: '700', color: 'var(--text-main)' }}>{item.title}</p>
+                  <p style={{ margin: 0, fontSize: '12px', color: 'var(--text-muted)', lineHeight: '1.5' }}>{item.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <button className="btn btn-indigo" onClick={() => setShowGuide(false)} style={{ width: '100%', marginTop: '24px', padding: '12px', fontWeight: '600' }}>Entendido ✓</button>
+          </div>
+        </div>
+      )}
+
       {/* MOBILE HEADER BAR */}
       <div className="mobile-header-bar">
         <button className="menu-toggle-btn" onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
@@ -1831,30 +1890,68 @@ export default function App() {
           </button>
         </div>
 
-        <div className="profile-widget">
-          <div className="profile-name">👤 {currentUser.name}</div>
-          <div className="profile-email">{currentUser.email || '(sin email)'}</div>
-          <div style={{ fontSize: '9px', color: 'var(--text-muted)', marginTop: '2px' }}>Zona: {currentUser.tz.split('/').pop().replace(/_/g, ' ')}</div>
-          <button
-            type="button"
-            onClick={() => {
-              setEditName(currentUser.name);
-              setEditEmail(currentUser.email || '');
-              setIsEditingProfile(true);
-            }}
-            className="btn-small"
-            style={{
-              marginTop: '10px',
-              padding: '4px 8px',
-              fontSize: '10px',
-              width: '100%',
-              backgroundColor: 'rgba(37, 99, 235, 0.12)',
-              color: 'var(--color-primary)',
-              border: '1px solid rgba(37, 99, 235, 0.2)'
-            }}
-          >
-            ✏️ Editar Perfil
-          </button>
+        <div className="profile-widget" style={{
+          padding: '16px',
+          borderRadius: '12px',
+          background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(124, 58, 237, 0.08) 100%)',
+          border: '2px solid var(--color-primary)',
+          marginTop: 'auto',
+          boxShadow: '0 4px 16px rgba(37, 99, 235, 0.1)'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+            <div style={{ fontSize: '24px' }}>👤</div>
+            <div>
+              <div className="profile-name" style={{ fontSize: '12px', fontWeight: '700', color: 'var(--text-main)' }}>{currentUser.name}</div>
+              <div className="profile-email" style={{ fontSize: '10px', color: 'var(--text-muted)' }}>{currentUser.email ? '✓ Email listo' : '⚠️ Falta email'}</div>
+            </div>
+          </div>
+          <div style={{ fontSize: '10px', color: 'var(--text-muted)', marginBottom: '12px', paddingBottom: '12px', borderBottom: '1px solid rgba(37, 99, 235, 0.2)' }}>
+            📍 {currentUser.tz.split('/').pop().replace(/_/g, ' ')}
+          </div>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <button
+              type="button"
+              onClick={() => { setShowGuide(true); }}
+              className="btn-small"
+              style={{
+                flex: 1,
+                padding: '8px',
+                fontSize: '10px',
+                backgroundColor: 'transparent',
+                color: 'var(--color-primary)',
+                border: '1px solid var(--color-primary)',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                fontWeight: '600',
+                transition: 'all 0.2s'
+              }}
+            >
+              ❓ Guía
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setEditName(currentUser.name);
+                setEditEmail(currentUser.email || '');
+                setIsEditingProfile(true);
+              }}
+              className="btn-small"
+              style={{
+                flex: 1,
+                padding: '8px',
+                fontSize: '10px',
+                backgroundColor: 'var(--color-primary)',
+                color: 'white',
+                border: 'none',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                fontWeight: '600',
+                transition: 'all 0.2s'
+              }}
+            >
+              ✏️ Editar
+            </button>
+          </div>
         </div>
       </nav>
 
