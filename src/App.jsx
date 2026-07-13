@@ -58,18 +58,13 @@ const UserPremiumIconFemale = ({ size = 40 }) => (
   </svg>
 );
 
-const CalendarPremiumIcon = ({ size = 26 }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 512 512" style={{ display: 'block' }} className="calendar-premium-icon">
+const CalendarPremiumIcon = ({ size = 26, isDark = false }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 512 512" style={{ display: 'block' }}>
     <defs>
-      <linearGradient id="calendarPremiumBgLight" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#1a1a1a"/>
-        <stop offset="50%" stopColor="#2d2d2d"/>
-        <stop offset="100%" stopColor="#1a1a1a"/>
-      </linearGradient>
-      <linearGradient id="calendarPremiumBgDark" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#ffffff"/>
-        <stop offset="50%" stopColor="#f0f0f0"/>
-        <stop offset="100%" stopColor="#ffffff"/>
+      <linearGradient id={`calendarBg${isDark ? 'Dark' : 'Light'}`} x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor={isDark ? "#ffffff" : "#1a1a1a"}/>
+        <stop offset="50%" stopColor={isDark ? "#f0f0f0" : "#2d2d2d"}/>
+        <stop offset="100%" stopColor={isDark ? "#ffffff" : "#1a1a1a"}/>
       </linearGradient>
       <filter id="calendarGlow">
         <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
@@ -79,8 +74,7 @@ const CalendarPremiumIcon = ({ size = 26 }) => (
         </feMerge>
       </filter>
     </defs>
-    <rect className="calendar-bg-light" width="512" height="512" rx="120" fill="url(#calendarPremiumBgLight)" filter="url(#calendarGlow)"/>
-    <rect className="calendar-bg-dark" width="512" height="512" rx="120" fill="url(#calendarPremiumBgDark)" filter="url(#calendarGlow)" style={{ display: 'none' }}/>
+    <rect width="512" height="512" rx="120" fill={`url(#calendarBg${isDark ? 'Dark' : 'Light'})`} filter="url(#calendarGlow)"/>
     <g transform="translate(100, 90) scale(14)">
       <path fill="white" stroke="white" strokeWidth="0.5" d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zm-5-10h3v3h-3zm-4 0h3v3H10zm4 4h3v3h-3zm-4 0h3v3H10z"/>
       <circle cx="7" cy="8" r="1.5" fill="#fbbf24" opacity="1"/>
@@ -209,7 +203,7 @@ const LandingPage = ({ onEnter, theme }) => (
           background: 'linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)',
           boxShadow: '0 8px 32px rgba(37, 99, 235, 0.3)'
         }}>
-          <CalendarPremiumIcon size={60} />
+          <CalendarPremiumIcon size={60} isDark={theme === 'dark'} />
         </div>
         <h1 style={{
           margin: '0 0 8px 0',
@@ -1574,7 +1568,7 @@ export default function App() {
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '24px' }}>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
               <div className="brand-logo-container calendar-glow-pulse">
-                <CalendarPremiumIcon size={44} />
+                <CalendarPremiumIcon size={44} isDark={theme === 'dark'} />
               </div>
               <div className="brand-title-stacked" style={{ textAlign: 'left' }}>
                 <span className="brand-title-sales" style={{ fontSize: '12px' }}>Real Sales Labs</span>
@@ -1975,7 +1969,7 @@ export default function App() {
         </button>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: 0 }}>
           <div className="brand-logo-container calendar-glow-pulse">
-            <CalendarPremiumIcon size={34} />
+            <CalendarPremiumIcon size={34} isDark={theme === 'dark'} />
           </div>
           <span className="brand-title-sales">Real Sales Labs</span>
         </div>
@@ -1989,7 +1983,7 @@ export default function App() {
       <nav className={`nav-sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <div style={{ marginBottom: '28px', display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div className="brand-logo-container calendar-glow-pulse">
-            <CalendarPremiumIcon size={34} />
+            <CalendarPremiumIcon size={34} isDark={theme === 'dark'} />
           </div>
           <span className="brand-title-sales">Real Sales Labs</span>
         </div>
