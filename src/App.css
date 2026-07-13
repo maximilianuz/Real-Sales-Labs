@@ -7,11 +7,15 @@
 }
 
 .kpi-card {
-  padding: 16px 20px;
+  padding: 20px 24px;
   display: flex;
   align-items: center;
-  gap: 14px;
-  background-color: var(--bg-card);
+  gap: 16px;
+  background: linear-gradient(135deg, var(--bg-card), var(--bg-card-hover));
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
 }
 
 .kpi-icon-container {
@@ -57,11 +61,18 @@
 }
 
 .section-card {
-  padding: 24px;
-  background-color: var(--bg-card);
+  padding: 28px;
+  background: linear-gradient(135deg, var(--bg-card), rgba(255, 255, 255, 0.5));
   display: flex;
   flex-direction: column;
   gap: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+html.dark .section-card {
+  background: linear-gradient(135deg, var(--bg-card), rgba(255, 255, 255, 0.02));
 }
 
 .section-title {
@@ -135,15 +146,22 @@
 }
 
 .btn-indigo {
-  background-color: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
   color: #ffffff;
   font-weight: 600;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.24);
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.32);
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-indigo:hover {
-  background-color: var(--color-primary-hover);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.36);
+  background: linear-gradient(135deg, var(--color-primary-hover), var(--color-secondary));
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.44);
+  transform: translateY(-2px);
+}
+
+.btn-indigo:active {
+  transform: translateY(0);
 }
 
 .btn-emerald {
@@ -160,11 +178,15 @@
   border: 1.5px solid var(--border-color);
   color: var(--text-main);
   font-weight: 500;
+  transition: all 0.2s ease;
 }
 
 .btn-outline:hover {
   background-color: var(--bg-card-hover);
-  border-color: var(--text-muted);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.12);
+  transform: translateY(-2px);
 }
 
 .btn-danger-icon {
@@ -239,26 +261,34 @@
   font-weight: 600;
   font-size: 13.5px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .wizard-btn-primary {
-  background-color: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
   color: white;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.28);
 }
 
 .wizard-btn-primary:hover {
-  background-color: var(--color-primary-hover);
+  background: linear-gradient(135deg, var(--color-primary-hover), var(--color-secondary));
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.40);
+  transform: translateY(-2px);
 }
 
 .wizard-btn-outline {
-  background-color: rgba(120, 120, 120, 0.05);
-  border: 1px solid var(--border-color);
+  background-color: var(--bg-card);
+  border: 1.5px solid var(--border-color);
   color: var(--text-main);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .wizard-btn-outline:hover {
-  background-color: rgba(120, 120, 120, 0.1);
+  background-color: var(--bg-card-hover);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.12);
+  transform: translateY(-2px);
 }
 
 .wizard-btn-danger {
@@ -468,16 +498,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 18px;
-  background-color: var(--bg-card-hover);
+  padding: 16px 20px;
+  background: linear-gradient(135deg, var(--bg-card), var(--bg-card-hover));
   border: 1px solid var(--border-color);
   border-radius: 12px;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   gap: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
 .member-row:hover {
-  background-color: rgba(120, 120, 120, 0.06);
+  background: linear-gradient(135deg, var(--bg-card-hover), rgba(255, 255, 255, 0.6));
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.12);
+  transform: translateY(-2px);
+}
+
+html.dark .member-row:hover {
+  background: linear-gradient(135deg, var(--bg-card-hover), rgba(255, 255, 255, 0.03));
 }
 
 .member-row-info {
