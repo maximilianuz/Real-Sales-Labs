@@ -506,6 +506,44 @@ export default function App() {
     }
   }, [roomName]);
 
+  // --- LOAD USER FROM SUPABASE ON APP START ---
+  useEffect(() => {
+    if (useMockDb || currentUser.email) return; // Skip if mock or user already loaded
+
+    const loadUserFromSupabase = async () => {
+      try {
+        // Try to load from Supabase if localStorage doesn't have email
+        const { data, error } = await supabase
+          .from('users')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(1);
+
+        if (data && data.length > 0) {
+          const userData = data[0];
+          // Load the most recent user from Supabase
+          localStorage.setItem('realsaleslabs-user-name', userData.name);
+          localStorage.setItem('realsaleslabs-user-email', userData.email);
+          localStorage.setItem('realsaleslabs-user-gender', userData.gender || 'otro');
+
+          setCurrentUser({
+            name: userData.name,
+            email: userData.email,
+            gender: userData.gender || 'otro',
+            tz: userData.timezone || currentUser.tz,
+            active: true
+          });
+
+          setShowInitialSetup(false);
+        }
+      } catch (err) {
+        console.log('No user found in Supabase yet');
+      }
+    };
+
+    loadUserFromSupabase();
+  }, []);
+
   // --- REAL-TIME DATA SYNCHRONIZATION WITH SUPABASE ---
   useEffect(() => {
     if (useMockDb) return;
@@ -1435,31 +1473,56 @@ export default function App() {
     setIsSidebarOpen(false); // Cierra el menú al cambiar de pestaña en móvil
   };
 
-  const saveProfileChanges = () => {
+  const saveProfileChanges = async () => {
     if (!editEmail.trim()) {
       showNotification('El email es requerido para sincronizar con Google Meet', 'error');
       return;
     }
 
-    localStorage.setItem('realsaleslabs-user-name', editName.trim());
-    localStorage.setItem('realsaleslabs-user-email', editEmail.trim());
+    const trimmedName = editName.trim();
+    const trimmedEmail = editEmail.trim();
+
+    // Guardar en localStorage
+    localStorage.setItem('realsaleslabs-user-name', trimmedName);
+    localStorage.setItem('realsaleslabs-user-email', trimmedEmail);
     localStorage.setItem('realsaleslabs-user-gender', editGender);
 
+    // Guardar en Supabase
+    if (!import.meta.env.VITE_SUPABASE_URL || !import.meta.env.VITE_SUPABASE_URL.includes('placeholder')) {
+      try {
+        const { error } = await supabase.from('users').upsert({
+          email: trimmedEmail,
+          name: trimmedName,
+          gender: editGender,
+          timezone: currentUser.tz
+        }, { onConflict: 'email' });
+
+        if (error) {
+          console.error('Error saving to Supabase:', error);
+          showNotification('⚠️ Perfil guardado localmente (error en servidor)', 'warning');
+        } else {
+          showNotification('✅ Perfil guardado en la nube', 'success');
+        }
+      } catch (err) {
+        console.error('Error:', err);
+        showNotification('⚠️ Perfil guardado localmente', 'warning');
+      }
+    }
+
     setCurrentUser({
-      name: editName.trim(),
-      email: editEmail.trim(),
+      name: trimmedName,
+      email: trimmedEmail,
       gender: editGender,
       tz: currentUser.tz,
       active: currentUser.active
     });
 
-    // Auto-completar el formulario de "Agregar Nuevo Role-Player" con los datos del perfil
-    setNewMemberName(editName.trim());
-    setNewMemberEmail(editEmail.trim());
+    // Auto-completar el formulario de "Agregar Nuevo Role-Player"
+    setNewMemberName(trimmedName);
+    setNewMemberEmail(trimmedEmail);
 
     setIsEditingProfile(false);
     setActiveTab('members');
-    showNotification('✅ Perfil actualizado. Confirma tus datos en "Gestionar Equipo" para unirte a la sala.', 'success');
   };
 
   if (false) { // No show login screen - open access
