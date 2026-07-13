@@ -1,18 +1,18 @@
 :root {
   /* Tema Claro */
-  --bg-main: #f5f7fa;
+  --bg-main: #f8fafc;
   --bg-sidebar: #ffffff;
-  --bg-card: rgba(255, 255, 255, 0.9);
-  --bg-card-hover: rgba(248, 250, 253, 0.95);
-  --border-color: rgba(0, 0, 0, 0.06);
-  --text-main: #1a202c;
-  --text-muted: #718096;
-  --color-primary: #2563eb;
-  --color-primary-hover: #1d4ed8;
-  --color-accent: #059669;
-  --color-accent-hover: #047857;
-  --color-danger: #ef4444;
-  --color-warning: #f59e0b;
+  --bg-card: rgba(255, 255, 255, 0.95);
+  --bg-card-hover: rgba(241, 245, 249, 0.98);
+  --border-color: rgba(0, 0, 0, 0.12);
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --color-primary: #0052cc;
+  --color-primary-hover: #003da8;
+  --color-accent: #00a854;
+  --color-accent-hover: #008c42;
+  --color-danger: #d32f2f;
+  --color-warning: #f57c00;
   --color-secondary: #7c3aed;
   --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
   --sidebar-width: 260px;
@@ -29,20 +29,20 @@
 
 /* Tema Oscuro Real Sales LAB */
 html.dark {
-  --bg-main: #0f172a;
-  --bg-sidebar: #1e293b;
-  --bg-card: rgba(30, 41, 59, 0.8);
-  --bg-card-hover: rgba(51, 65, 85, 0.85);
-  --border-color: rgba(255, 255, 255, 0.08);
-  --text-main: #f1f5f9;
-  --text-muted: #cbd5e1;
-  --color-primary: #3b82f6;
-  --color-primary-hover: #2563eb;
-  --color-accent: #10b981;
-  --color-accent-hover: #059669;
-  --color-danger: #f87171;
-  --color-warning: #fbbf24;
-  --color-secondary: #a78bfa;
+  --bg-main: #0a0e27;
+  --bg-sidebar: #1a1f3a;
+  --bg-card: rgba(20, 26, 49, 0.9);
+  --bg-card-hover: rgba(32, 40, 71, 0.95);
+  --border-color: rgba(255, 255, 255, 0.15);
+  --text-main: #f0f4f8;
+  --text-muted: #a0aec0;
+  --color-primary: #60a5fa;
+  --color-primary-hover: #3b82f6;
+  --color-accent: #34d399;
+  --color-accent-hover: #10b981;
+  --color-danger: #ff6b6b;
+  --color-warning: #ffa94d;
+  --color-secondary: #c4b5fd;
   --header-bg: rgba(15, 23, 42, 0.8);
   --wizard-card-bg: rgba(15, 23, 42, 0.9);
   --wizard-card-border: rgba(255, 255, 255, 0.1);
